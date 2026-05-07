@@ -1,0 +1,83 @@
+﻿<div class="aurum-alert-success" role="alert">
+    <div class="alert-icon">
+        <i class="bi bi-check2-all"></i>
+    </div>
+    <div class="alert-content">
+        <h4 class="alert-title">Operation Perfected</h4>
+        <div class="alert-divider"></div>
+        <p class="alert-footer">Database operation successful!</p>
+    </div>
+</div>
+
+<style>
+    /* ── Aurum Success Alert ── */
+    .aurum-alert-success {
+        background-color: #FAF8F4; /* --off-white from your layout */
+        border: 1px solid rgba(201, 168, 76, 0.2); /* Soft Gold border */
+        border-left: 4px solid #C9A84C; /* Solid Gold accent */
+        padding: 20px 28px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        box-shadow: 0 8px 25px rgba(74, 15, 28, 0.04);
+        border-radius: 2px;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+        /* Subtle decorative background ornament */
+        .aurum-alert-success::after {
+            content: '✦';
+            position: absolute;
+            right: 15px;
+            bottom: -5px;
+            font-size: 3rem;
+            color: var(--gold-pale);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .aurum-alert-success .alert-icon {
+            font-size: 1.5rem;
+            color: #C9A84C;
+            background: white;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(201, 168, 76, 0.15);
+        }
+
+        .aurum-alert-success .alert-content {
+            flex-grow: 1;
+        }
+
+        .aurum-alert-success .alert-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin: 0;
+            letter-spacing: 0.03em;
+        }
+
+        .aurum-alert-success .alert-divider {
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold-light), transparent);
+            margin: 8px 0;
+            width: 180px;
+        }
+
+        .aurum-alert-success .alert-footer {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--gold);
+            margin: 0;
+        }
+</style>

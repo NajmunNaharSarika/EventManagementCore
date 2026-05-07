@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aurum Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script type="importmap"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EventManagementProject.styles.css" asp-append-version="true" />
+
+    <style>
+        :root {
+            --maroon: #6B1A2A;
+            --maroon-dark: #4A0F1C;
+            --maroon-mid: #8B2035;
+            --gold: #C9A84C;
+            --gold-light: #E2C27D;
+            --gold-pale: #F5E9CC;
+            --white: #FFFFFF;
+            --off-white: #FAF8F4;
+            --text-dark: #2C1810;
+            --text-mid: #5A3A3A;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+            /* Kill any Bootstrap or site.css body padding/margin */
+            body > * {
+                margin-top: 0 !important;
+            }
+
+        /* ══════════════════════════════════════
+                   TOP BAR
+                ══════════════════════════════════════ */
+       /*  .top-bar {
+            background: var(--maroon-dark);
+            color: var(--gold-light);
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 6px 0;
+            text-align: center;
+        }
+
+            .top-bar span {
+                opacity: 0.75;
+            }
+
+                .top-bar span + span::before {
+                    content: " · ";
+                    opacity: 0.45;
+                    margin: 0 8px;
+                } */
+
+        /* ══════════════════════════════════════
+                   NAVBAR
+                ══════════════════════════════════════ */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-navbar {
+            background: var(--maroon) !important;
+            border-bottom: none;
+            padding: 0 2.5rem;
+            box-shadow: 0 4px 24px rgba(74,15,28,0.35);
+        }
+
+        /* Brand */
+        .navbar-brand-wrap {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            text-decoration: none;
+            padding: 14px 0;
+        }
+
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+        }
+
+        .brand-tagline {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(226,194,125,0.65);
+            margin-top: 2px;
+        }
+
+        .brand-ornament {
+            display: inline-block;
+            width: 18px;
+            height: 1.5px;
+            background: var(--gold);
+            vertical-align: middle;
+            margin: 0 6px;
+        }
+
+        /* Nav links */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.15rem;
+            margin: 0;
+            padding: 0;
+        }
+
+            .nav-links .nav-link {
+                font-size: 0.68rem;
+                font-weight: 600;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.75) !important;
+                padding: 8px 14px !important;
+                border-radius: 2px;
+                transition: color 0.25s;
+                position: relative;
+            }
+
+                .nav-links .nav-link::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 4px;
+                    left: 14px;
+                    right: 14px;
+                    height: 1px;
+                    background: var(--gold);
+                    transform: scaleX(0);
+                    transition: transform 0.25s ease;
+                }
+
+                .nav-links .nav-link:hover {
+                    color: var(--gold) !important;
+                }
+
+                    .nav-links .nav-link:hover::after {
+                        transform: scaleX(1);
+                    }
+
+        /* Divider pip between nav groups */
+        .nav-divider {
+            width: 1px;
+            height: 18px;
+            background: rgba(201,168,76,0.25);
+            margin: 0 8px;
+        }
+
+        /* Gold CTA button */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--maroon-dark) !important;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 9px 22px !important;
+            border-radius: 2px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(201,168,76,0.3);
+            transition: box-shadow 0.25s, transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .btn-gold:hover {
+                box-shadow: 0 4px 18px rgba(201,168,76,0.5);
+                transform: translateY(-1px);
+                color: var(--maroon-dark) !important;
+            }
+
+            .btn-gold::after {
+                display: none !important;
+            }
+
+        /* Mobile toggler */
+        .navbar-toggler {
+            border: 1px solid rgba(201,168,76,0.5);
+            border-radius: 2px;
+            padding: 6px 10px;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23C9A84C' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Divider line beneath navbar */
+        .gold-rule {
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold-light) 60%, transparent 100%);
+        }
+
+        /* ══════════════════════════════════════
+                   MAIN CONTENT
+                ══════════════════════════════════════ */
+        .main-wrapper {
+            flex: 1;
+        }
+
+        .main-content {
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        /* Override Bootstrap default container/navbar spacing */
+        .navbar {
+            margin-bottom: 0 !important;
+        }
+
+        .container-fluid {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Login partial link color fix on dark navbar */
+        #loginPartialWrapper a,
+        #loginPartialWrapper .nav-link {
+            color: rgba(255,255,255,0.75) !important;
+            font-size: 0.7rem !important;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+        }
+
+            #loginPartialWrapper a:hover,
+            #loginPartialWrapper .nav-link:hover {
+                color: var(--gold) !important;
+            }
+
+        footer {
+            background: var(--maroon-dark);
+            color: rgba(255,255,255,0.55);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-inner {
+            padding: 32px 30px 20px;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.06em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .footer-sub {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(201,168,76,0.6);
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(201,168,76,0.18);
+            margin: 20px 0;
+        }
+
+        .footer-copy {
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+        }
+
+            .footer-copy a {
+                color: var(--gold-light);
+                text-decoration: none;
+                opacity: 0.8;
+            }
+
+                .footer-copy a:hover {
+                    opacity: 1;
+                }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+            .footer-links a {
+                color: rgba(255,255,255,0.45);
+                font-size: 0.65rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+                .footer-links a:hover {
+                    color: var(--gold-light);
+                }
+
+        /* Gold accent stripe at top of footer */
+        .footer-accent {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), transparent);
+        }
+
+    </style>
+
+    <script>
+        function LoadData(EventId = null) {
+            var eventCntr = $("#eventContainer");
+            $.ajax({
+                url: "/Clients/AddNewEvent" + (EventId != null ? "?id=" + EventId : ""),
+                type: "GET",
+                success: function (data) { eventCntr.append(data); }
+            });
+        }
+        $(document).on("click", "#btnPlus", function (e) { e.preventDefault(); LoadData(); });
+        $(document).on("click", "#btnDelete", function (e) { e.preventDefault(); $(this).parent().parent().remove(); });
+    </script>
+</head>
+<body>
+
+   @*  <!-- ── Top announcement bar ── -->
+    <div class="top-bar">
+        <span>Aurum Events &amp; Co.</span>
+        <span>Crafting Extraordinary Experiences Since 2010</span>
+        <span>info&#64;aurumevents.com</span>
+    </div> *@
+
+    <!-- ── Primary Navigation ── -->
+    <header>
+        <nav class="main-navbar navbar navbar-expand-lg">
+            <div class="container-fluid" style="padding-left:2rem;padding-right:2rem;">
+
+                <!-- Brand -->
+                <a class="navbar-brand-wrap" asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="brand-name">
+                        <span class="brand-ornament"></span>AURUM<span class="brand-ornament"></span>
+                    </span>
+                    <span class="brand-tagline">Events &amp; Luxury Productions</span>
+                </a>
+
+                <!-- Mobile toggle -->
+                <button class="navbar-toggler ms-auto me-2" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#mainNavCollapse"
+                        aria-controls="mainNavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="mainNavCollapse">
+                    <ul class="nav-links ms-4 me-auto">
+                        <li>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
+                        </li>
+                        <li><div class="nav-divider"></div></li>
+                          @if (User.IsInRole("Admin") || User.IsInRole("Manager")) 
+                          { 
+                         @if (User.IsInRole("Admin"))
+                            { 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Role Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="AssignRole">Assign Role</a>
+                        </li>
+                          } 
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="Create"></a>
+                        </li>
+                         } 
+                    </ul>
+
+                    <!-- Login partial + CTA -->
+                    <div class="d-flex align-items-center gap-3" id="loginPartialWrapper">
+                        @await Component.InvokeAsync("RunningEvents")
+                        <partial name="_LoginPartial" />
+                        
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="gold-rule"></div>
+    </header>
+
+    <!-- ── Main Content ── -->
+    <div class="main-wrapper">
+        <div class="container-fluid main-content">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="footer-accent"></div>
+        <div class="footer-inner">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <span class="footer-brand">Aurum Events &amp; Co.</span>
+                    <span class="footer-sub">Luxury · Celebration · Legacy</span>
+                </div>
+                <div class="col-md-7 text-md-end mt-3 mt-md-0">
+                    <ul class="footer-links">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Events" asp-action="Index">Events</a></li>
+                        <li><a asp-area="" asp-controller="Clients" asp-action="Index">Clients</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-copy d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <span>&copy; @DateTime.Now.Year Aurum Events &amp; Co. All rights reserved.</span>
+                <span>Powered by <a href="https://www.isdb-bisew.org" target="_blank">ISDB-BISEW</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

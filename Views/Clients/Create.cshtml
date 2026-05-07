@@ -1,0 +1,333 @@
+﻿@model ClientVM
+@{
+    ViewData["Title"] = "Add New Client";
+}
+
+<style>
+    /* ── Page-level overrides using layout tokens ── */
+    .aurum-page-header {
+        margin-bottom: 2rem;
+    }
+
+        .aurum-page-header .page-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+            .aurum-page-header .page-eyebrow::before,
+            .aurum-page-header .page-eyebrow::after {
+                content: '';
+                display: inline-block;
+                height: 1px;
+                width: 28px;
+                background: var(--gold);
+                opacity: 0.5;
+            }
+
+        .aurum-page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            letter-spacing: 0.03em;
+            line-height: 1.1;
+        }
+
+    /* ── Cards ── */
+    .aurum-card {
+        background: #fff;
+        border: 1px solid rgba(201,168,76,0.18);
+        border-top: 3px solid var(--gold);
+        border-radius: 4px;
+        padding: 2rem 2.2rem;
+        box-shadow: 0 4px 24px rgba(74,15,28,0.07);
+    }
+
+    .aurum-card-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--maroon);
+        letter-spacing: 0.04em;
+        margin-bottom: 1.4rem;
+        padding-bottom: 0.7rem;
+        border-bottom: 1px solid rgba(201,168,76,0.2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .aurum-card-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+    /* ── Form controls ── */
+    .aurum-label {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-mid);
+        padding-top: 8px;
+    }
+
+    .aurum-input {
+        background: var(--off-white);
+        border: 1px solid rgba(107,26,42,0.18);
+        border-radius: 2px;
+        font-size: 0.85rem;
+        color: var(--text-dark);
+        padding: 8px 12px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        width: 100%;
+    }
+
+        .aurum-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+            outline: none;
+            background: #fff;
+        }
+
+        .aurum-input[type="file"] {
+            padding: 5px 10px;
+        }
+
+    .aurum-checkbox-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-top: 6px;
+    }
+
+    .aurum-checkbox {
+        width: 16px;
+        height: 16px;
+        accent-color: var(--maroon);
+        cursor: pointer;
+    }
+
+    .aurum-checkbox-label {
+        font-size: 0.8rem;
+        color: var(--text-mid);
+        cursor: pointer;
+    }
+
+    .field-validation-error {
+        font-size: 0.7rem;
+        color: #c0392b;
+        display: block;
+        margin-top: 3px;
+    }
+
+    /* ── Buttons ── */
+    .btn-aurum-primary {
+        background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-mid) 100%);
+        color: var(--gold-light) !important;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 10px 28px;
+        border: none;
+        border-radius: 2px;
+        box-shadow: 0 2px 12px rgba(74,15,28,0.25);
+        transition: box-shadow 0.25s, transform 0.2s;
+        cursor: pointer;
+    }
+
+        .btn-aurum-primary:hover {
+            box-shadow: 0 4px 20px rgba(74,15,28,0.38);
+            transform: translateY(-1px);
+        }
+
+    .btn-aurum-outline {
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold) !important;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 7px 18px;
+        border-radius: 2px;
+        transition: background 0.2s, color 0.2s;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-aurum-outline:hover {
+            background: var(--gold);
+            color: var(--maroon-dark) !important;
+        }
+
+    /* ── Event card items ── */
+    .event-item-placeholder {
+        font-size: 0.78rem;
+        color: rgba(90,58,58,0.5);
+        text-align: center;
+        padding: 2rem 1rem;
+        border: 1px dashed rgba(201,168,76,0.3);
+        border-radius: 4px;
+        font-style: italic;
+    }
+
+    /* ── Back link ── */
+    .aurum-back-link {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--maroon);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 1.5rem;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+        .aurum-back-link:hover {
+            opacity: 1;
+            color: var(--maroon);
+        }
+
+        .aurum-back-link::before {
+            content: '←';
+            font-size: 0.9rem;
+        }
+
+    /* ── Panel feedback ── */
+    #panel:not(:empty) {
+        margin-bottom: 1rem;
+        padding: 10px 14px;
+        background: rgba(201,168,76,0.1);
+        border-left: 3px solid var(--gold);
+        border-radius: 2px;
+        font-size: 0.8rem;
+        color: var(--maroon-dark);
+    }
+</style>
+
+<div id="panel"></div>
+
+<a class="aurum-back-link" asp-controller="Clients" asp-action="Index">Back to Clients</a>
+
+<div class="aurum-page-header">
+    <div class="page-eyebrow">Client Management</div>
+    <h1>Add New Client</h1>
+</div>
+
+<form id="frmCreate"
+      asp-action="Create"
+      asp-controller="Clients"
+      data-ajax-method="post"
+      data-ajax-mode="replace"
+      data-ajax-update="#panel"
+      data-ajax-success="success"
+      data-ajax="true"
+      enctype="multipart/form-data">
+
+    <div class="row g-4">
+
+        <!-- ── Left: Client Form ── -->
+        <div class="col-lg-6">
+            <div class="aurum-card">
+                <div class="aurum-card-title">Client Details</div>
+
+                <!-- Client Name -->
+                <div class="row mb-3 align-items-start">
+                    <label class="aurum-label col-4" asp-for="ClientName"></label>
+                    <div class="col-8">
+                        <input asp-for="ClientName" class="aurum-input" placeholder="Full name" />
+                        <span asp-validation-for="ClientName" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Birth Date -->
+                <div class="row mb-3 align-items-start">
+                    <label class="aurum-label col-4" asp-for="BirthDate"></label>
+                    <div class="col-8">
+                        <input asp-for="BirthDate" class="aurum-input" type="date" />
+                        <span asp-validation-for="BirthDate" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Age -->
+                <div class="row mb-3 align-items-start">
+                    <label class="aurum-label col-4" asp-for="Age"></label>
+                    <div class="col-8">
+                        <input asp-for="Age" class="aurum-input" placeholder="Age" />
+                        <span asp-validation-for="Age" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Photo -->
+                <div class="row mb-3 align-items-start">
+                    <label class="aurum-label col-4" asp-for="ImageFile"></label>
+                    <div class="col-8">
+                        <input asp-for="ImageFile" class="aurum-input" type="file" accept="image/*" />
+                        <span asp-validation-for="ImageFile" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Marital Status -->
+                <div class="row mb-4 align-items-start">
+                    <label class="aurum-label col-4" asp-for="MaritalStatus"></label>
+                    <div class="col-8">
+                        <div class="aurum-checkbox-wrap">
+                            <input asp-for="MaritalStatus" class="aurum-checkbox" type="checkbox" id="maritalCheck" />
+                            <label class="aurum-checkbox-label" for="maritalCheck">Married</label>
+                        </div>
+                        <span asp-validation-for="MaritalStatus" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="d-flex gap-3 pt-2" style="border-top:1px solid rgba(201,168,76,0.15);">
+                    <button type="submit" class="btn-aurum-primary">Save Client</button>
+                    <a class="btn-aurum-outline" asp-controller="Clients" asp-action="Index">Cancel</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Right: Event List ── -->
+        <div class="col-lg-6">
+            <div class="aurum-card">
+                <div class="aurum-card-title">Linked Events</div>
+                <div class="d-flex justify-content-end mb-3">
+                    <a class="btn-aurum-outline" id="btnPlus">+ Add Event</a>
+                </div>
+                <div id="eventContainer">
+                    <script>LoadData()</script>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/ajax/dist/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function success() {
+            $("#frmCreate").trigger('reset');
+        }
+    </script>
+}

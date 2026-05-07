@@ -1,0 +1,321 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    /* ── Auth Page Wrapper ── */
+    .auth-wrapper {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+
+    .auth-container {
+        width: 100%;
+        max-width: 520px;
+    }
+
+    /* ── Brand Header ── */
+    .auth-brand {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .auth-brand-ornament {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+        .auth-brand-ornament::before,
+        .auth-brand-ornament::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 36px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+
+        .auth-brand-ornament::after {
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+    .auth-brand-diamond {
+        color: var(--gold);
+        font-size: 0.7rem;
+    }
+
+    .auth-brand-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: var(--maroon-dark);
+        letter-spacing: 0.06em;
+        line-height: 1;
+        margin: 0 0 4px;
+    }
+
+    .auth-brand-sub {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+    }
+
+    /* ── Card ── */
+    .auth-card {
+        background: #fff;
+        border: 1px solid rgba(201,168,76,0.18);
+        border-top: 3px solid var(--gold);
+        border-radius: 4px;
+        padding: 2.2rem 2.4rem;
+        box-shadow: 0 8px 40px rgba(74,15,28,0.1);
+    }
+
+    .auth-card-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--maroon);
+        letter-spacing: 0.04em;
+        margin-bottom: 0.3rem;
+        text-align: center;
+    }
+
+    .auth-card-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.68rem;
+        color: #9A7070;
+        text-align: center;
+        margin-bottom: 1.8rem;
+        letter-spacing: 0.06em;
+    }
+
+    .auth-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent);
+        margin-bottom: 1.8rem;
+    }
+
+    /* ── Section Label ── */
+    .section-eyebrow {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1rem;
+    }
+
+        .section-eyebrow::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(201,168,76,0.25);
+        }
+
+    /* ── Fields ── */
+    .aurum-field {
+        margin-bottom: 1.1rem;
+    }
+
+    .aurum-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-mid);
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .aurum-input {
+        background: var(--off-white);
+        border: 1px solid rgba(107,26,42,0.16);
+        border-radius: 2px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.84rem;
+        color: var(--text-dark);
+        padding: 10px 14px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        width: 100%;
+        display: block;
+    }
+
+        .aurum-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+            outline: none;
+            background: #fff;
+        }
+
+    .field-validation-error {
+        font-size: 0.65rem;
+        color: #c0392b;
+        display: block;
+        margin-top: 4px;
+        letter-spacing: 0.04em;
+    }
+
+    .validation-summary-errors {
+        font-size: 0.72rem;
+        color: #c0392b;
+        background: rgba(192,57,43,0.06);
+        border: 1px solid rgba(192,57,43,0.18);
+        border-left: 3px solid #c0392b;
+        padding: 10px 14px;
+        border-radius: 2px;
+        margin-bottom: 1.2rem;
+    }
+
+    /* Two column row */
+    .aurum-field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    /* ── Submit ── */
+    .btn-aurum-primary {
+        background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-mid) 100%);
+        color: var(--gold-light) !important;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 2px;
+        width: 100%;
+        box-shadow: 0 2px 14px rgba(74,15,28,0.28);
+        transition: box-shadow 0.25s, transform 0.2s;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        margin-top: 1.4rem;
+    }
+
+        .btn-aurum-primary:hover {
+            box-shadow: 0 5px 22px rgba(74,15,28,0.4);
+            transform: translateY(-1px);
+        }
+
+    /* ── Footer ── */
+    .auth-footer {
+        margin-top: 1.4rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid rgba(201,168,76,0.15);
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.68rem;
+        color: #9A7070;
+    }
+
+        .auth-footer a {
+            color: var(--maroon);
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+        }
+
+            .auth-footer a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="auth-wrapper">
+    <div class="auth-container">
+
+        <!-- Brand Header -->
+        <div class="auth-brand">
+            <div class="auth-brand-ornament">
+                <span class="auth-brand-diamond">◆</span>
+            </div>
+            <h1 class="auth-brand-name">Aurum Events</h1>
+            <p class="auth-brand-sub">Luxury · Celebration · Legacy</p>
+        </div>
+
+        <!-- Card -->
+        <div class="auth-card">
+            <div class="auth-card-title">Create Account</div>
+            <div class="auth-card-subtitle">Join Aurum Events &amp; Co. today</div>
+            <div class="auth-divider"></div>
+
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div asp-validation-summary="ModelOnly" class="validation-summary-errors" role="alert"></div>
+
+                <!-- Personal Info -->
+                <div class="section-eyebrow">Personal Information</div>
+                <div class="aurum-field">
+                    <label asp-for="Input.Name" class="aurum-label">Full Name</label>
+                    <input asp-for="Input.Name" class="aurum-input" placeholder="Your full name" />
+                    <span asp-validation-for="Input.Name" class="field-validation-error"></span>
+                </div>
+
+                <div class="aurum-field-row">
+                    <div class="aurum-field">
+                        <label asp-for="Input.CellPhone" class="aurum-label">Cell Phone</label>
+                        <input asp-for="Input.CellPhone" class="aurum-input" placeholder="+880..." />
+                        <span asp-validation-for="Input.CellPhone" class="field-validation-error"></span>
+                    </div>
+                    <div class="aurum-field">
+                        <label asp-for="Input.Country" class="aurum-label">Country</label>
+                        <input asp-for="Input.Country" class="aurum-input" placeholder="Bangladesh" />
+                        <span asp-validation-for="Input.Country" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <!-- Account Info -->
+                <div class="section-eyebrow" style="margin-top:1.4rem;">Account Credentials</div>
+                <div class="aurum-field">
+                    <label asp-for="Input.Email" class="aurum-label">Email Address</label>
+                    <input asp-for="Input.Email" class="aurum-input" autocomplete="username"
+                           aria-required="true" placeholder="name@example.com" />
+                    <span asp-validation-for="Input.Email" class="field-validation-error"></span>
+                </div>
+
+                <div class="aurum-field-row">
+                    <div class="aurum-field">
+                        <label asp-for="Input.Password" class="aurum-label">Password</label>
+                        <input asp-for="Input.Password" class="aurum-input" autocomplete="new-password"
+                               aria-required="true" placeholder="••••••••" />
+                        <span asp-validation-for="Input.Password" class="field-validation-error"></span>
+                    </div>
+                    <div class="aurum-field">
+                        <label asp-for="Input.ConfirmPassword" class="aurum-label">Confirm Password</label>
+                        <input asp-for="Input.ConfirmPassword" class="aurum-input" autocomplete="new-password"
+                               aria-required="true" placeholder="••••••••" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="field-validation-error"></span>
+                    </div>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="btn-aurum-primary">
+                    Create Account
+                </button>
+
+                <div class="auth-footer">
+                    Already have an account? <a asp-page="./Login">Sign in here</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

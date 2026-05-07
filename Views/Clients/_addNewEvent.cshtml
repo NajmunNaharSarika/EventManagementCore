@@ -1,0 +1,9 @@
+﻿@model Event
+<div class="row mb-2">
+    <div class="col-10">
+        @Html.DropDownListFor(xx => xx.EventId, ViewBag.events as SelectList, "-------Select------", new { @class = "form-select form-select-sm" })
+    </div>
+    <div class="col-2">
+        <a class="btn btn-danger btn-sm" id="btnDelete">X</a>
+    </div>
+</div>

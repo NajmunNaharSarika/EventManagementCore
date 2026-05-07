@@ -1,0 +1,219 @@
+﻿@{
+    ViewData["Title"] = "Assign Role";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="aurum-page-header text-center">
+                <div class="page-eyebrow">User Authorization</div>
+                <h1>Assign <span>User Role</span></h1>
+            </div>
+
+            @if (TempData["msg"] != null)
+            {
+                <div class="aurum-toast mb-4">
+                    <i class="bi bi-shield-check"></i>
+                    <span>@TempData["msg"]</span>
+                </div>
+            }
+
+            <div class="aurum-card">
+                <div class="card-accent"></div>
+
+                <div class="p-4 p-md-5">
+                    <form asp-action="AssignRole" asp-controller="Role" method="post">
+
+                        <div class="aurum-form-group mb-4">
+                            <label class="aurum-label">Professional List</label>
+                            <div class="input-wrapper">
+                                <select name="userData" class="aurum-select">
+                                    <option value="" disabled selected>—— Select a user account ——</option>
+                                    @foreach (var item in ViewBag.users)
+                                    {
+                                        <option value="@item.Email">@item.Email</option>
+                                    }
+                                </select>
+                                <span class="input-focus-line"></span>
+                            </div>
+                        </div>
+
+                        <div class="aurum-form-group mb-4">
+                            <label class="aurum-label">Authority Level</label>
+                            <div class="input-wrapper">
+                                <select name="roleData" class="aurum-select">
+                                    <option value="" disabled selected>—— Select an access level ——</option>
+                                    @foreach (var item in ViewBag.roles)
+                                    {
+                                        <option value="@item.NormalizedName">@item.NormalizedName</option>
+                                    }
+                                </select>
+                                <span class="input-focus-line"></span>
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <button type="submit" class="btn-aurum-primary w-100">
+                                Confirm Role Assignment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p class="text-center mt-4 small text-muted italic" style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;">
+                "Orchestrating excellence through disciplined management."
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ── Header Styles ── */
+    .aurum-page-header {
+        margin-bottom: 3rem;
+    }
+
+        .aurum-page-header .page-eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+            .aurum-page-header .page-eyebrow::before,
+            .aurum-page-header .page-eyebrow::after {
+                content: '';
+                display: inline-block;
+                height: 1px;
+                width: 40px;
+                background: var(--gold);
+                opacity: 0.4;
+            }
+
+        .aurum-page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin: 0;
+            line-height: 1;
+        }
+
+            .aurum-page-header h1 span {
+                font-weight: 300;
+                font-style: italic;
+                color: var(--gold);
+            }
+
+    /* ── Feedback Message ── */
+    .aurum-toast {
+        background: var(--off-white);
+        border: 1px solid var(--gold-pale);
+        border-left: 4px solid var(--gold);
+        padding: 15px 20px;
+        color: var(--maroon-dark);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    /* ── Card & Inputs ── */
+    .aurum-card {
+        background: white;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        box-shadow: 0 15px 40px rgba(74, 15, 28, 0.07);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-accent {
+        height: 5px;
+        background: linear-gradient(90deg, var(--maroon-dark), var(--gold), var(--maroon-dark));
+    }
+
+    .aurum-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--maroon-mid);
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .aurum-select {
+        width: 100%;
+        padding: 14px 18px;
+        background-color: var(--off-white);
+        border: 1px solid #e2e2e2;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        outline: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236B1A2A' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1.25rem center;
+    }
+
+        .aurum-select:focus {
+            background-color: white;
+            border-color: var(--gold);
+        }
+
+    .input-focus-line {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--gold);
+        transition: all 0.4s ease;
+        transform: translateX(-50%);
+    }
+
+    .aurum-select:focus + .input-focus-line {
+        width: 100%;
+    }
+
+    /* ── Button ── */
+    .btn-aurum-primary {
+        background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
+        color: var(--gold-pale);
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding: 16px;
+        transition: 0.3s;
+    }
+
+        .btn-aurum-primary:hover {
+            filter: brightness(1.2);
+            letter-spacing: 2.5px;
+            color: white;
+        }
+
+    .italic {
+        font-style: italic;
+    }
+</style>

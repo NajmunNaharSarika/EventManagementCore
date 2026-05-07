@@ -1,0 +1,74 @@
+﻿<div class="aurum-alert-danger" role="alert">
+    <div class="alert-icon">
+        <i class="bi bi-exclamation-triangle"></i>
+    </div>
+    <div class="alert-content">
+        <h4 class="alert-title">Critical System Notice</h4>
+        <p class="alert-message">
+            Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
+        </p>
+        <div class="alert-divider"></div>
+        <p class="alert-footer">Database operation failed!!!</p>
+    </div>
+</div>
+
+<style>
+    /* ── Aurum Danger Alert ── */
+    .aurum-alert-danger {
+        background-color: #fcf4f4;
+        border: 1px solid rgba(192, 57, 43, 0.15);
+        border-left: 4px solid #c0392b; /* Aurum Danger Red */
+        padding: 24px 30px;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        box-shadow: 0 6px 20px rgba(192, 57, 43, 0.06);
+        border-radius: 2px;
+        margin-bottom: 2rem;
+    }
+
+        .aurum-alert-danger .alert-icon {
+            font-size: 1.8rem;
+            color: #c0392b;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .aurum-alert-danger .alert-content {
+            flex-grow: 1;
+        }
+
+        .aurum-alert-danger .alert-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #a93226; /* Darker red for contrast */
+            margin: 0 0 10px 0;
+            letter-spacing: 0.02em;
+        }
+
+        .aurum-alert-danger .alert-message {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: #7b241c;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .aurum-alert-danger .alert-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(192, 57, 43, 0.2), transparent);
+            margin: 16px 0;
+            width: 100%;
+        }
+
+        .aurum-alert-danger .alert-footer {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #c0392b;
+            margin: 0;
+        }
+</style>

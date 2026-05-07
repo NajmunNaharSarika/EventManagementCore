@@ -1,0 +1,208 @@
+﻿@model EventManagementCore.Models.Event
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="aurum-page-header text-center">
+                <div class="page-eyebrow">Service Specification</div>
+                <h1>Event <span>Profile</span></h1>
+            </div>
+
+            <div class="aurum-card">
+                <div class="card-accent"></div>
+
+                <div class="p-4 p-md-5">
+                    <div class="detail-item mb-4">
+                        <span class="aurum-label">Official Designation</span>
+                        <h2 class="display-value">@Html.DisplayFor(model => model.EventName)</h2>
+                    </div>
+
+                    <div class="detail-divider"></div>
+
+                    <div class="metadata-grid mt-4">
+                        <div class="meta-item">
+                            <span class="meta-label">Unique ID</span>
+                            <span class="meta-value">#EVT-@Model.EventId.ToString("D4")</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value status-active">Active Service</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column flex-sm-row gap-3 mt-5 pt-4 border-top border-light">
+                        <a asp-action="Edit" asp-route-id="@Model?.EventId" class="btn-aurum-primary flex-grow-1 text-center text-decoration-none">
+                            Edit Specification
+                        </a>
+                        <a asp-action="Index" class="btn-aurum-outline flex-grow-1 text-center text-decoration-none">
+                            Return to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center mt-4 small text-muted italic" style="font-family: 'Cormorant Garamond', serif;">
+                "Defining the standard for luxury celebrations."
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ── Header Styles ── */
+    .aurum-page-header {
+        margin-bottom: 2.5rem;
+    }
+
+        .aurum-page-header .page-eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+            .aurum-page-header .page-eyebrow::before,
+            .aurum-page-header .page-eyebrow::after {
+                content: '';
+                display: inline-block;
+                height: 1px;
+                width: 30px;
+                background: var(--gold);
+                opacity: 0.4;
+            }
+
+        .aurum-page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin: 0;
+        }
+
+            .aurum-page-header h1 span {
+                font-weight: 300;
+                font-style: italic;
+                color: var(--gold);
+            }
+
+    /* ── Card Styling ── */
+    .aurum-card {
+        background: white;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        box-shadow: 0 12px 40px rgba(74, 15, 28, 0.06);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-accent {
+        height: 4px;
+        background: linear-gradient(90deg, var(--maroon), var(--gold), var(--maroon));
+    }
+
+    /* ── Detail Content ── */
+    .aurum-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold);
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .display-value {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.5rem;
+        color: var(--maroon-dark);
+        margin: 0;
+        line-height: 1.1;
+    }
+
+    .detail-divider {
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold-pale), transparent);
+        width: 100%;
+    }
+
+    .metadata-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .meta-label {
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        color: #888;
+        letter-spacing: 0.1em;
+        margin-bottom: 4px;
+    }
+
+    .meta-value {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-dark);
+    }
+
+    .status-active {
+        color: #27ae60;
+        font-weight: 600;
+    }
+
+    /* ── Buttons ── */
+    .btn-aurum-primary {
+        background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
+        color: var(--gold-pale);
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 14px 25px;
+        transition: 0.3s;
+    }
+
+        .btn-aurum-primary:hover {
+            filter: brightness(1.2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 15, 28, 0.2);
+        }
+
+    .btn-aurum-outline {
+        background: transparent;
+        color: var(--maroon);
+        border: 1px solid var(--gold);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 13px 25px;
+        transition: 0.3s;
+    }
+
+        .btn-aurum-outline:hover {
+            background: var(--gold-pale);
+            color: var(--maroon-dark);
+        }
+
+    .italic {
+        font-style: italic;
+    }
+</style>

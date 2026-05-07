@@ -1,0 +1,214 @@
+﻿@model IEnumerable<EventManagementCore.Models.Event>
+
+@{
+    ViewData["Title"] = "Event Catalog";
+}
+
+<div class="container py-4">
+    <div class="page-header">
+        <div class="page-title-area">
+            <div class="page-eyebrow">Exquisite Management</div>
+            <h1 class="page-title">Event <span>Types</span></h1>
+        </div>
+        <a asp-action="Create" class="btn-aurum-gold">
+            <span class="btn-icon">+</span> Add New Event
+        </a>
+    </div>
+
+    <div class="events-grid">
+        @if (!Model.Any())
+        {
+            <div class="aurum-card text-center py-5">
+                <p class="text-muted m-0">No event types have been defined yet.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="aurum-card-mini">
+                    <div class="card-accent"></div>
+                    <div class="card-content">
+                        <div class="event-info">
+                            <span class="event-label">Service Type</span>
+                            <h3 class="event-name">@Html.DisplayFor(modelItem => item.EventName)</h3>
+                        </div>
+
+                        <div class="card-actions">
+                            <a asp-action="Edit" asp-route-id="@item.EventId" class="btn-action edit" title="Edit">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.EventId" class="btn-action details" title="Details">
+                                View
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.EventId" class="btn-action delete" title="Delete">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<style>
+    /* ── Header Styles ── */
+    .page-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid var(--gold-pale);
+        gap: 1rem;
+    }
+
+    .page-eyebrow {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+    }
+
+    .page-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--maroon-dark);
+        line-height: 0.9;
+        margin: 0;
+    }
+
+        .page-title span {
+            font-weight: 300;
+            font-style: italic;
+            color: var(--gold);
+        }
+
+    /* ── Grid & Card Styles ── */
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .aurum-card-mini {
+        background: white;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        position: relative;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(74, 15, 28, 0.05);
+    }
+
+        .aurum-card-mini:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(74, 15, 28, 0.1);
+            border-color: var(--gold);
+        }
+
+    .card-accent {
+        height: 3px;
+        background: linear-gradient(90deg, var(--maroon), var(--gold));
+        width: 100%;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 160px;
+    }
+
+    .event-label {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold);
+        font-weight: 600;
+    }
+
+    .event-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.6rem;
+        color: var(--maroon-dark);
+        margin-top: 5px;
+    }
+
+    /* ── Action Buttons ── */
+    .card-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--off-white);
+    }
+
+    .btn-action {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 2px;
+        transition: 0.2s;
+    }
+
+        .btn-action.edit {
+            color: var(--maroon);
+            border: 1px solid var(--maroon-mid);
+        }
+
+            .btn-action.edit:hover {
+                background: var(--maroon);
+                color: white;
+            }
+
+        .btn-action.details {
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+            .btn-action.details:hover {
+                background: var(--gold);
+                color: white;
+            }
+
+        .btn-action.delete {
+            color: #c0392b;
+            border: 1px solid #c0392b;
+        }
+
+            .btn-action.delete:hover {
+                background: #c0392b;
+                color: white;
+            }
+
+    /* ── Gold Button ── */
+    .btn-aurum-gold {
+        background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        color: var(--maroon-dark) !important;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 12px 24px;
+        border: none;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+    }
+
+        .btn-aurum-gold:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(201, 168, 76, 0.4);
+        }
+</style>

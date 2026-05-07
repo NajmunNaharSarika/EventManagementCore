@@ -1,0 +1,434 @@
+﻿@model IEnumerable<Client>
+@{
+    ViewData["Title"] = "Client List";
+}
+
+<style>
+    :root {
+        --maroon: #6B1A2A;
+        --maroon-dark: #4A0F1C;
+        --maroon-mid: #8B2035;
+        --gold: #C9A84C;
+        --gold-light: #E2C27D;
+        --gold-pale: #F5E9CC;
+        --white: #FFFFFF;
+        --off-white: #FAF8F4;
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        margin-bottom: 28px;
+        border-bottom: 1px solid var(--gold-pale);
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .page-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: var(--maroon);
+        letter-spacing: 0.02em;
+        line-height: 1;
+        margin: 0;
+    }
+
+        .page-title span {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+    .page-title-ornament {
+        display: inline-block;
+        width: 28px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+
+    /* ── Add Client Button ── */
+    .btn-aurum {
+        background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+        color: var(--maroon-dark) !important;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 10px 24px;
+        border-radius: 2px;
+        border: none;
+        box-shadow: 0 2px 12px rgba(201,168,76,0.3);
+        text-decoration: none;
+        transition: box-shadow 0.2s, transform 0.2s;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+        .btn-aurum:hover {
+            box-shadow: 0 4px 20px rgba(201,168,76,0.5);
+            transform: translateY(-1px);
+            color: var(--maroon-dark) !important;
+        }
+
+    /* ── Client Card ── */
+    .client-card {
+        background: var(--white);
+        border: 1px solid var(--gold-pale);
+        border-radius: 4px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 12px rgba(107,26,42,0.06);
+        overflow: hidden;
+        transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+        .client-card:hover {
+            box-shadow: 0 6px 28px rgba(107,26,42,0.13);
+            transform: translateY(-2px);
+        }
+
+        /* Card accent bar */
+        .client-card::before {
+            content: '';
+            display: block;
+            height: 3px;
+            background: linear-gradient(90deg, var(--maroon), var(--gold), var(--gold-light));
+        }
+
+    /* ── Card Header ── */
+    .client-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
+        background: var(--off-white);
+        border-bottom: 1px solid var(--gold-pale);
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .client-info {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .client-avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--gold);
+        box-shadow: 0 2px 8px rgba(201,168,76,0.25);
+        background: var(--gold-pale);
+        flex-shrink: 0;
+    }
+
+    .client-avatar-placeholder {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--maroon), var(--maroon-mid));
+        border: 2px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
+        color: var(--gold);
+        font-weight: 700;
+    }
+
+    .client-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .client-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--maroon);
+        letter-spacing: 0.03em;
+        line-height: 1;
+    }
+
+    .client-details {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .client-detail-item {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.65rem;
+        color: #7A5050;
+        letter-spacing: 0.06em;
+    }
+
+        .client-detail-item strong {
+            font-weight: 600;
+            color: var(--maroon);
+            text-transform: uppercase;
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            margin-right: 3px;
+        }
+
+    /* ── Action Buttons ── */
+    .client-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .btn-edit {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 16px;
+        border-radius: 2px;
+        border: 1px solid var(--gold);
+        color: var(--maroon) !important;
+        background: transparent;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+    }
+
+        .btn-edit:hover {
+            background: var(--gold);
+            color: var(--maroon-dark) !important;
+        }
+
+    .btn-delete {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 7px 16px;
+        border-radius: 2px;
+        border: 1px solid rgba(107,26,42,0.3);
+        color: var(--maroon) !important;
+        background: transparent;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s;
+    }
+
+        .btn-delete:hover {
+            background: var(--maroon);
+            color: var(--white) !important;
+            border-color: var(--maroon);
+        }
+
+    /* ── Events Table ── */
+    .client-card-body {
+        padding: 0;
+    }
+
+    .events-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        padding: 10px 20px 6px;
+        background: var(--white);
+    }
+
+    .events-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.72rem;
+    }
+
+        .events-table thead tr {
+            background: var(--maroon);
+        }
+
+        .events-table thead th {
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.62rem;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .events-table tbody tr {
+            border-bottom: 1px solid var(--gold-pale);
+            transition: background 0.15s;
+        }
+
+            .events-table tbody tr:last-child {
+                border-bottom: none;
+            }
+
+            .events-table tbody tr:hover {
+                background: #FDF6EC;
+            }
+
+        .events-table tbody td {
+            padding: 10px 20px;
+            color: #4A2C2C;
+            border: none;
+        }
+
+            .events-table tbody td::before {
+                content: '◆';
+                color: var(--gold);
+                font-size: 0.45rem;
+                margin-right: 8px;
+                vertical-align: middle;
+            }
+
+    /* Empty state */
+    .no-events {
+        padding: 18px 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        color: #B0909090;
+        font-style: italic;
+        letter-spacing: 0.06em;
+        text-align: center;
+        background: var(--white);
+    }
+
+    /* Empty page state */
+    .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        color: #C0A0A0;
+    }
+
+    .empty-state-icon {
+        font-size: 3rem;
+        margin-bottom: 16px;
+        opacity: 0.4;
+    }
+
+    .empty-state p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+</style>
+
+<div class="row">
+    <div class="col">
+
+        <!-- ── Page Header ── -->
+        <div class="page-header">
+            <h2 class="page-title">
+                <span><span class="page-title-ornament"></span>Aurum Events &amp; Co.</span>
+                Client Registry
+            </h2>
+            <a asp-action="Create" asp-controller="Clients" class="btn-aurum">
+                + Add New Client
+            </a>
+        </div>
+
+        <!-- ── Client Cards ── -->
+        @if (!Model.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-state-icon">✦</div>
+                <p>No clients registered yet</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var c in Model)
+            {
+                <div class="client-card">
+                    <div class="client-card-header">
+
+                        <!-- Avatar + Info -->
+                        <div class="client-info">
+                            @if (!string.IsNullOrEmpty(c.Image))
+                            {
+                                <img src="@c.Image" class="client-avatar" alt="@c.ClientName" />
+                            }
+                            else
+                            {
+                                <div class="client-avatar-placeholder">
+                                    @(c.ClientName?.Length > 0 ? c.ClientName[0].ToString().ToUpper() : "C")
+                                </div>
+                            }
+                            <div class="client-meta">
+                                <div class="client-name">@Html.DisplayFor(xx => c.ClientName)</div>
+                                <div class="client-details">
+                                    <span class="client-detail-item">
+                                        <strong>DOB</strong>@Html.DisplayFor(xx => c.BirthDate)
+                                    </span>
+                                    <span class="client-detail-item">
+                                        <strong>Age</strong>@Html.DisplayFor(xx => c.Age)
+                                    </span>
+                                    <span class="client-detail-item">
+                                        <strong>Status</strong>@(c.MaritalStatus?"Married":"Unmarried")
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="client-actions">
+                            <a asp-action="Edit" asp-controller="Clients" asp-route-id="@c.ClientId" class="btn-edit">Edit</a>
+                            <a asp-action="Delete" asp-controller="Clients" asp-route-id="@c.ClientId" class="btn-delete">Delete</a>
+                        </div>
+
+                    </div>
+
+                    <!-- Events Table -->
+                    <div class="client-card-body">
+                        @if (c.EventServices != null && c.EventServices.Any())
+                        {
+                            <div class="events-label">Booked Events</div>
+                            <table class="events-table">
+                                <thead>
+                                    <tr>
+                                        <th>Event Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in c.EventServices)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(xx => item.Event.EventName)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <div class="no-events">No events booked for this client</div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>

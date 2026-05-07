@@ -1,0 +1,201 @@
+﻿@model EventManagementCore.Models.Event
+
+@{
+    ViewData["Title"] = "Add New Event Type";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="aurum-page-header text-center">
+                <div class="page-eyebrow">Service Definition</div>
+                <h1>New <span>Event Type</span></h1>
+            </div>
+
+            <div class="aurum-card">
+                <div class="card-accent"></div>
+
+                <form asp-action="Create" class="p-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                    <div class="aurum-form-group mb-4">
+                        <label asp-for="EventName" class="aurum-label">Event Name</label>
+                        <div class="input-wrapper">
+                            <input asp-for="EventName" class="aurum-input" placeholder="e.g. Royal Wedding, Corporate Gala" />
+                            <span class="input-focus-line"></span>
+                        </div>
+                        <span asp-validation-for="EventName" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="d-flex flex-column gap-3 mt-5">
+                        <button type="submit" class="btn-aurum-primary w-100">
+                            Create Event Type
+                        </button>
+                        <a asp-action="Index" class="btn-aurum-outline text-center w-100">
+                            Return to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <p class="text-center mt-4 small text-muted italic" style="font-family: 'Cormorant Garamond', serif;">
+                "Defining excellence in every celebration."
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ── Header Styles (Consistency with Client Views) ── */
+    .aurum-page-header {
+        margin-bottom: 2.5rem;
+    }
+
+        .aurum-page-header .page-eyebrow {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+            .aurum-page-header .page-eyebrow::before,
+            .aurum-page-header .page-eyebrow::after {
+                content: '';
+                display: inline-block;
+                height: 1px;
+                width: 30px;
+                background: var(--gold);
+                opacity: 0.4;
+            }
+
+        .aurum-page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin: 0;
+        }
+
+            .aurum-page-header h1 span {
+                font-weight: 300;
+                font-style: italic;
+                color: var(--gold);
+            }
+
+    /* ── Card Styling ── */
+    .aurum-card {
+        background: white;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        box-shadow: 0 10px 30px rgba(74, 15, 28, 0.08);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-accent {
+        height: 4px;
+        background: linear-gradient(90deg, var(--maroon), var(--gold), var(--maroon));
+    }
+
+    /* ── Form Controls ── */
+    .aurum-label {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--maroon-mid);
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    .aurum-input {
+        width: 100%;
+        padding: 12px 15px;
+        background-color: var(--off-white);
+        border: 1px solid #e2e2e2;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+        .aurum-input:focus {
+            background-color: white;
+            border-color: var(--gold);
+        }
+
+    .input-focus-line {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--gold);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    .aurum-input:focus + .input-focus-line {
+        width: 100%;
+    }
+
+    /* ── Buttons ── */
+    .btn-aurum-primary {
+        background: linear-gradient(135deg, var(--maroon-dark), var(--maroon));
+        color: var(--gold-pale);
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 14px;
+        transition: 0.3s;
+    }
+
+        .btn-aurum-primary:hover {
+            filter: brightness(1.2);
+            letter-spacing: 3px;
+            color: white;
+        }
+
+    .btn-aurum-outline {
+        background: transparent;
+        color: var(--maroon);
+        border: 1px solid var(--gold);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 12px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .btn-aurum-outline:hover {
+            background: var(--gold-pale);
+            color: var(--maroon-dark);
+        }
+
+    .italic {
+        font-style: italic;
+    }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

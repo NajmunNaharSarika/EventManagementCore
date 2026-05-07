@@ -1,0 +1,61 @@
+﻿@model int
+
+<style>
+    .aurum-active-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+        color: var(--maroon-dark);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 8px 18px;
+        border-radius: 2px;
+        box-shadow: 0 2px 12px rgba(201,168,76,0.28);
+        border: none;
+    }
+
+        .aurum-active-badge .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--maroon);
+            border-radius: 50%;
+            animation: pulse-dot 1.6s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+    @@keyframes pulse-dot {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        50% {
+            opacity: 0.5;
+            transform: scale(0.7);
+        }
+    }
+
+    .aurum-active-badge .badge-count {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--maroon-dark);
+        line-height: 1;
+    }
+
+    .badge-divider {
+        width: 1px;
+        height: 16px;
+        background: rgba(107,26,42,0.25);
+    }
+</style>
+
+<div class="aurum-active-badge">
+    <span class="badge-dot"></span>
+    <span>Active Events</span>
+    <span class="badge-divider"></span>
+    <span class="badge-count">@Model</span>
+</div>
